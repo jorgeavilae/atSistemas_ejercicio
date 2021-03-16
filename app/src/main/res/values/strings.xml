@@ -102,4 +102,6 @@
     <string name="accept">Aceptar</string>
     <string name="alert">AVISO</string>
     <string name="close">Cerrar</string>
+    <string name="transaction_list">Transaction List</string>
+    <string name="profile">Profile</string>
 </resources>
