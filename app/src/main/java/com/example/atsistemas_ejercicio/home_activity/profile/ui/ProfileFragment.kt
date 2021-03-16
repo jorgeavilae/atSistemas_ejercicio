@@ -52,7 +52,6 @@ class ProfileFragment: BaseFragment() {
 
         })
 
-
         return view
     }
 
@@ -68,6 +67,11 @@ class ProfileFragment: BaseFragment() {
                 binding.textInputSurname.editText?.setText(surname)
             }
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        presenter.fetchData()
     }
 
     override fun onDestroyView() {

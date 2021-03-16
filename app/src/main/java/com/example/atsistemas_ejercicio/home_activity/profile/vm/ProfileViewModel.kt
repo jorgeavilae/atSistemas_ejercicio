@@ -20,7 +20,7 @@ class ProfileViewModel(private val repository: TransactionRepository): BaseViewM
     val surname: LiveData<String>
         get() = _surname
 
-    init {
+    fun fetchData() {
         viewModelScope.launch(Dispatchers.IO) {
             _name.postValue(repository.getName())
             _surname.postValue(repository.getSurname())
