@@ -1,17 +1,20 @@
 package com.example.data.repositories
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import com.example.data.commons.BaseRepository
+import com.example.data.commons.Constants
 import com.example.data.local.BankDatabase
 import com.example.data.models.TransactionDTO
 import com.example.data.remote.ITransactionAPI
 import com.example.data.remote.ResultHandler
 import com.example.data.utils.TransactionsUtil
-import retrofit2.HttpException
-import retrofit2.Response
-import java.io.IOException
 
-class TransactionRepository(private val api: ITransactionAPI, private val bankDB: BankDatabase) :
+class TransactionRepository(
+    private val context: Context,
+    private val api: ITransactionAPI,
+    private val bankDB: BankDatabase
+) :
     BaseRepository() {
 
     val mTransactions: LiveData<List<TransactionDTO>> by lazy {
@@ -49,10 +52,43 @@ class TransactionRepository(private val api: ITransactionAPI, private val bankDB
 //        bankDB.transactionDao().save(transactions)
 //    }
 
-    suspend fun getTransactionById(transactionId: String) : TransactionDTO? =
+    fun getTransactionById(transactionId: String): TransactionDTO? =
         bankDB.transactionDao().getTransactionById(transactionId)
 
-    suspend fun deleteTransactions() {
+    fun deleteTransactions() {
         bankDB.transactionDao().deleteAll()
+    }
+
+    //SharedPreferences
+    fun getName(): String {
+        val sharedPref = context.getSharedPreferences(
+            Constants.SHARED_PREFERENCES_FILE, Context.MODE_PRIVATE
+        )
+        return sharedPref.getString(Constants.PREFERENCES_NAME_KEY, "") ?: ""
+    }
+
+    fun setName(name: String) {
+        val sharedPref =
+            context.getSharedPreferences(Constants.SHARED_PREFERENCES_FILE, Context.MODE_PRIVATE)
+        with(sharedPref.edit()) {
+            putString(Constants.PREFERENCES_NAME_KEY, name)
+            commit()
+        }
+    }
+
+    fun getSurname(): String {
+        val sharedPref = context.getSharedPreferences(
+            Constants.SHARED_PREFERENCES_FILE, Context.MODE_PRIVATE
+        )
+        return sharedPref.getString(Constants.PREFERENCES_SURNAME_KEY, "") ?: ""
+    }
+
+    fun setSurname(surname: String) {
+        val sharedPref =
+            context.getSharedPreferences(Constants.SHARED_PREFERENCES_FILE, Context.MODE_PRIVATE)
+        with(sharedPref.edit()) {
+            putString(Constants.PREFERENCES_SURNAME_KEY, surname)
+            commit()
+        }
     }
 }

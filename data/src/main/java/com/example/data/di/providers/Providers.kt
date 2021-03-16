@@ -1,7 +1,6 @@
 package com.example.data.di.providers
 
 import android.app.Application
-import androidx.room.RoomDatabase
 import com.example.data.BuildConfig
 import com.example.data.local.BankDatabase
 import com.example.data.remote.ITransactionAPI
@@ -9,7 +8,6 @@ import com.example.data.remote.interceptors.MockInterceptor
 import com.example.data.repositories.TransactionRepository
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -52,5 +50,5 @@ fun provideTransactionApi(retrofit: Retrofit): ITransactionAPI =
 fun provideBankDatabase(application: Application): BankDatabase =
     BankDatabase.getInstance(application)
 
-fun provideTransactionRepository(retrofit: ITransactionAPI, bankDB: BankDatabase): TransactionRepository =
-    TransactionRepository(retrofit, bankDB)
+fun provideTransactionRepository(application: Application, retrofit: ITransactionAPI, bankDB: BankDatabase): TransactionRepository =
+    TransactionRepository(application, retrofit, bankDB)

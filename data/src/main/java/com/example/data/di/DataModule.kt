@@ -10,5 +10,5 @@ val dataModule = module {
     single { provideRetrofit(get(), get()) }
     single { provideTransactionApi(get()) }
     single { provideBankDatabase(get()) }
-    single { provideTransactionRepository(get(), get()) }
+    single { provideTransactionRepository(get(), get(), get()) }
 }
