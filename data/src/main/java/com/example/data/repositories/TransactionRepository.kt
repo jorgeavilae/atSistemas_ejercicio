@@ -1,6 +1,12 @@
 package com.example.data.repositories
 
 import android.content.Context
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.emptyPreferences
+import androidx.datastore.preferences.core.stringPreferencesKey
+import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.LiveData
 import com.example.data.commons.BaseRepository
 import com.example.data.commons.Constants
@@ -9,6 +15,13 @@ import com.example.data.models.TransactionDTO
 import com.example.data.remote.ITransactionAPI
 import com.example.data.remote.ResultHandler
 import com.example.data.utils.TransactionsUtil
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
+import java.io.IOException
+
+private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = Constants.DATASTORE_NAME)
 
 class TransactionRepository(
     private val context: Context,
@@ -59,36 +72,42 @@ class TransactionRepository(
         bankDB.transactionDao().deleteAll()
     }
 
-    //SharedPreferences
-    fun getName(): String {
-        val sharedPref = context.getSharedPreferences(
-            Constants.SHARED_PREFERENCES_FILE, Context.MODE_PRIVATE
-        )
-        return sharedPref.getString(Constants.PREFERENCES_NAME_KEY, "") ?: ""
-    }
+    // DataStore
+    private val namePreferencesFlow: Flow<String> = context.dataStore.data
+        .catch { exception ->
+            // it throws an IOException when an error is encountered when reading data
+            if (exception is IOException) emit(emptyPreferences())
+            else throw exception
+        }.map { preferences ->
+            val nameKey = stringPreferencesKey(Constants.PREFERENCES_NAME_KEY)
+            preferences[nameKey] ?: ""
+        }
 
-    fun setName(name: String) {
-        val sharedPref =
-            context.getSharedPreferences(Constants.SHARED_PREFERENCES_FILE, Context.MODE_PRIVATE)
-        with(sharedPref.edit()) {
-            putString(Constants.PREFERENCES_NAME_KEY, name)
-            commit()
+    suspend fun getName() : String = namePreferencesFlow.first()
+
+    suspend fun setName(name: String) {
+        context.dataStore.edit { preferences ->
+            val nameKey = stringPreferencesKey(Constants.PREFERENCES_NAME_KEY)
+            preferences[nameKey] = name
         }
     }
 
-    fun getSurname(): String {
-        val sharedPref = context.getSharedPreferences(
-            Constants.SHARED_PREFERENCES_FILE, Context.MODE_PRIVATE
-        )
-        return sharedPref.getString(Constants.PREFERENCES_SURNAME_KEY, "") ?: ""
-    }
+    private val surnamePreferencesFlow: Flow<String> = context.dataStore.data
+        .catch { exception ->
+            // it throws an IOException when an error is encountered when reading data
+            if (exception is IOException) emit(emptyPreferences())
+            else throw exception
+        }.map { preferences ->
+            val surnameKey = stringPreferencesKey(Constants.PREFERENCES_SURNAME_KEY)
+            preferences[surnameKey] ?: ""
+        }
 
-    fun setSurname(surname: String) {
-        val sharedPref =
-            context.getSharedPreferences(Constants.SHARED_PREFERENCES_FILE, Context.MODE_PRIVATE)
-        with(sharedPref.edit()) {
-            putString(Constants.PREFERENCES_SURNAME_KEY, surname)
-            commit()
+    suspend fun getSurname() : String = surnamePreferencesFlow.first()
+
+    suspend fun setSurname(surname: String) {
+        context.dataStore.edit { preferences ->
+            val surnameKey = stringPreferencesKey(Constants.PREFERENCES_SURNAME_KEY)
+            preferences[surnameKey] = surname
         }
     }
 }

@@ -9,6 +9,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class ProfileViewModel(private val repository: TransactionRepository): BaseViewModel() {
+    /* Esta opción no funciona porque entra en un bucle de actualizaciones */
+    // val nameDataStore : LiveData<String> = repository.namePreferencesFlow.asLiveData()
+
     private val _name = MutableLiveData<String>()
     val name: LiveData<String>
         get() = _name
