@@ -7,12 +7,12 @@ import android.view.Menu
 import android.view.MenuItem
 import com.example.atsistemas_ejercicio.R
 import com.example.atsistemas_ejercicio.commons.BaseActivity
-import com.example.atsistemas_ejercicio.home_activity.home.vm.HomeViewModel
+import com.example.atsistemas_ejercicio.home_activity.list.vm.ListViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeActivity : BaseActivity() {
 
-    private val presenterHomeViewModel: HomeViewModel by viewModel()
+    private val presenterListViewModel: ListViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,7 +20,7 @@ class HomeActivity : BaseActivity() {
         setSupportActionBar(findViewById(R.id.toolbar))
         findViewById<CollapsingToolbarLayout>(R.id.toolbar_layout).title = title
         findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
-            presenterHomeViewModel.fetchTransactions()
+            presenterListViewModel.fetchTransactions()
         }
     }
 

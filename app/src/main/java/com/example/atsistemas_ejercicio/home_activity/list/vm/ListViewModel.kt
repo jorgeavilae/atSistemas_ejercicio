@@ -1,4 +1,4 @@
-package com.example.atsistemas_ejercicio.home_activity.home.vm
+package com.example.atsistemas_ejercicio.home_activity.list.vm
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
@@ -9,7 +9,7 @@ import com.example.data.repositories.TransactionRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class HomeViewModel(private val repository: TransactionRepository) : BaseViewModel() {
+class ListViewModel(private val repository: TransactionRepository) : BaseViewModel() {
 
     val transactionList: LiveData<List<TransactionDTO>> = repository.mTransactions
 

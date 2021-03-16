@@ -1,4 +1,4 @@
-package com.example.atsistemas_ejercicio.home_activity.home.ui
+package com.example.atsistemas_ejercicio.home_activity.list.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,18 +11,20 @@ import com.example.atsistemas_ejercicio.R
 import com.example.atsistemas_ejercicio.commons.BaseFragment
 import com.example.atsistemas_ejercicio.commons.uicomponents.ErrorDialog
 import com.example.atsistemas_ejercicio.commons.uicomponents.SuccessDialog
-import com.example.atsistemas_ejercicio.databinding.HomeFragmentBinding
-import com.example.atsistemas_ejercicio.home_activity.home.vm.HomeViewModel
+import com.example.atsistemas_ejercicio.databinding.ListFragmentBinding
+import com.example.atsistemas_ejercicio.home_activity.home.ui.CellClickListener
+import com.example.atsistemas_ejercicio.home_activity.home.ui.TransactionAdapter
+import com.example.atsistemas_ejercicio.home_activity.list.vm.ListViewModel
 import com.example.atsistemas_ejercicio.utils.SharedTransactionVM
 import com.example.data.models.TransactionDTO
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-class HomeFragment : BaseFragment(), CellClickListener {
+class ListFragment : BaseFragment(), CellClickListener {
 
-    private val presenter: HomeViewModel by sharedViewModel()
+    private val presenter: ListViewModel by sharedViewModel()
     private val sharedTransactionVM: SharedTransactionVM by sharedViewModel()
 
-    private var _binding: HomeFragmentBinding? = null
+    private var _binding: ListFragmentBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var adapter: TransactionAdapter
@@ -33,7 +35,7 @@ class HomeFragment : BaseFragment(), CellClickListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = HomeFragmentBinding.inflate(inflater, container, false)
+        _binding = ListFragmentBinding.inflate(inflater, container, false)
         val view = binding.root
         return view
     }
@@ -88,7 +90,7 @@ class HomeFragment : BaseFragment(), CellClickListener {
 
         Toast.makeText(activity,"Cell: ${transactionDTO.description}", Toast.LENGTH_SHORT).show()
         sharedTransactionVM.setTransaction(transactionDTO)
-        findNavController().navigate(R.id.action_homeFragment_to_detailFragment)
+        findNavController().navigate(R.id.action_listFragment_to_detailFragment)
     }
 
     override fun onDestroyView() {
