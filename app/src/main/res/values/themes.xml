@@ -1,0 +1,62 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.AtSistemas1" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryDark</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="Theme.AtSistemas1.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.AtSistemas1.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.AtSistemas1.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="AppTheme.PrimaryButton" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:background">@color/white</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:elevation">4dp</item>
+        <item name="android:layout_marginBottom">4dp</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="AppTheme.PrimaryButton.M">
+        <item name="android:textSize">@dimen/textSizeL</item>
+        <item name="android:minWidth">@dimen/buttonMMinWidth</item>
+        <item name="android:padding">@dimen/buttonMPadding</item>
+        <item name="android:layout_width">wrap_content</item>
+    </style>
+
+    <style name="MyDialogAnimation">
+        <item name="android:windowEnterAnimation">@android:anim/slide_in_left</item>
+        <item name="android:windowExitAnimation">@android:anim/slide_out_right</item>
+        <item name="android:interpolator">@android:anim/accelerate_interpolator</item>
+    </style>
+    <style name="AppTheme.MyPrimaryButton" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:elevation">4dp</item>
+        <item name="android:layout_marginBottom">4dp</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="AppTheme.MyPrimaryButton.M">
+        <item name="android:textSize">@dimen/textSizeL</item>
+        <item name="android:minWidth">@dimen/buttonMMinWidth</item>
+        <item name="android:padding">@dimen/buttonMPadding</item>
+        <item name="android:layout_width">wrap_content</item>
+    </style>
+</resources>

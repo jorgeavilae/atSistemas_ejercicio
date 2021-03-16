@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.atsistemas_ejercicio.home_activity.home.ui.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/home_fragment">
+        <action
+            android:id="@+id/action_homeFragment_to_ddetailFragment"
+            app:destination="@id/ddetailFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/ddetailFragment"
+        android:name="com.example.atsistemas_ejercicio.home_activity.detail.ui.DDetailFragment"
+        android:label="DDetailFragment"
+        tools:layout="@layout/ddetail_fragment" >
+        <argument android:name="transactionId"
+            app:argType="integer"
+            android:defaultValue="-1" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.example.atsistemas_ejercicio.home_activity.detail.ui.DetailFragment"
+        android:label="DetailFragment"
+        tools:layout="@layout/detail_fragment"/>
+</navigation>
