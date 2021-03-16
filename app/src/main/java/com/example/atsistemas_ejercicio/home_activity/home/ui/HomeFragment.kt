@@ -26,7 +26,7 @@ class HomeFragment : BaseFragment() {
             findNavController().navigate(R.id.action_homeFragment_to_listFragment)
         }
         binding.toProfileButton.setOnClickListener {
-//            findNavController().navigate(R.id.)
+            findNavController().navigate(R.id.action_homeFragment_to_profileFragment)
         }
 
         return view

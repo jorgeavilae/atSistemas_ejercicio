@@ -8,10 +8,14 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.atsistemas_ejercicio.home_activity.home.ui.HomeFragment"
-        android:label="HomeFragment">
+        android:label="HomeFragment"
+        tools:layout="@layout/home_fragment">
         <action
             android:id="@+id/action_homeFragment_to_listFragment"
             app:destination="@id/listFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
 
     <fragment
@@ -43,4 +47,10 @@
         android:name="com.example.atsistemas_ejercicio.home_activity.detail.ui.DetailFragment"
         android:label="DetailFragment"
         tools:layout="@layout/detail_fragment" />
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.atsistemas_ejercicio.home_activity.profile.ui.ProfileFragment"
+        android:label="ProfileFragment"
+        tools:layout="@layout/profile_fragment"/>
 </navigation>

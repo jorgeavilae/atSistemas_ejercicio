@@ -104,4 +104,6 @@
     <string name="close">Cerrar</string>
     <string name="transaction_list">Transaction List</string>
     <string name="profile">Profile</string>
+    <string name="form_name">Insert Name</string>
+    <string name="form_surname">Insert Surname</string>
 </resources>
